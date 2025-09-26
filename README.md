@@ -25,3 +25,4 @@ microservice architecture ASP.NET course by ArtSofte
 
 ### Design-система:
 [Ссылка](https://www.figma.com/design/FLo9DaqkZ7hyjJloM2TlzT/System-Design-Booking-App?m=auto&t=2JDV55POh6IYLEYZ-6)
+![System-Design Booking App](https://github.com/user-attachments/assets/bb7d67c9-cd05-44ea-b79b-a0b24cbad8ab)
