@@ -24,4 +24,4 @@ microservice architecture ASP.NET course by ArtSofte
 <br> Opt. Review-service – опциональный по причине того, что можно просто прикрутить трастпилот к сервису, чтобы все отзывы люди публиковали там, ведь так проще бороться с накруткой отзывов и проще отвечать на отзывы
 
 ### Design-система:
-[Ссылка]()
+[Ссылка](https://www.figma.com/design/FLo9DaqkZ7hyjJloM2TlzT/System-Design-Booking-App?m=auto&t=2JDV55POh6IYLEYZ-6)
