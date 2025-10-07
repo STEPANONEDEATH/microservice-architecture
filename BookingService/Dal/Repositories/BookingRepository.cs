@@ -1,5 +1,5 @@
-using BookingService.Dal.Entities;
 using BookingService.Dal.Interfaces;
+using BookingService.Dal.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookingService.Dal.Repositories

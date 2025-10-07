@@ -1,11 +1,16 @@
-using BookingService.Api.Dtos;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using BookingService.Logic.Models;
 
+#nullable enable
 namespace BookingService.Logic.Interfaces
 {
     public interface IBookingService
     {
         Task<BookingResponse> CreateBookingAsync(CreateBookingRequest request);
-        Task<BookingResponse?> GetBookingAsync(Guid id);
-        Task<bool> CancelBookingAsync(Guid id);
+        Task<BookingResponse?> GetByIdAsync(Guid id);
+        Task<IEnumerable<BookingResponse>> GetAllAsync();
     }
 }
+#nullable restore

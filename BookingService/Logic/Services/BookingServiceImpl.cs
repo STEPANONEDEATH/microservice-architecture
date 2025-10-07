@@ -1,20 +1,24 @@
-using Api.Dtos;
-using Dal.Entities;
-using Dal.Interfaces;
-using Logic.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BookingService.Dal.Entities;
+using BookingService.Dal.Interfaces;
+using BookingService.Logic.Interfaces;
+using BookingService.Logic.Models;
 
-namespace Logic.Services
+namespace BookingService.Logic.Services
 {
     public class BookingServiceImpl : IBookingService
     {
-        private readonly IBookingRepository _bookingRepository;
+        private readonly IBookingRepository _repository;
 
-        public BookingServiceImpl(IBookingRepository bookingRepository)
+        public BookingServiceImpl(IBookingRepository repository)
         {
-            _bookingRepository = bookingRepository;
+            _repository = repository;
         }
 
-        public async Task<Response> CreateBookingAsync(CreateBookingRequest request)
+        public async Task<BookingResponse> CreateBookingAsync(CreateBookingRequest request)
         {
             var booking = new Booking
             {
@@ -26,29 +30,47 @@ namespace Logic.Services
                 Status = "Created"
             };
 
-            await _bookingRepository.AddAsync(booking);
+            await _repository.AddAsync(booking);
 
-            return new Response(booking.Id, booking.Status);
+            return new BookingResponse
+            {
+                Id = booking.Id,
+                UserId = booking.UserId,
+                ListingId = booking.ListingId,
+                StartDate = booking.StartDate,
+                EndDate = booking.EndDate,
+                Status = booking.Status
+            };
         }
 
-        public async Task<Response?> GetBookingAsync(Guid id)
+        public async Task<BookingResponse?> GetByIdAsync(Guid id)
         {
-            var booking = await _bookingRepository.GetByIdAsync(id);
+            var booking = await _repository.GetByIdAsync(id);
             if (booking == null) return null;
-            return new Response(booking.Id, booking.Status);
+
+            return new BookingResponse
+            {
+                Id = booking.Id,
+                UserId = booking.UserId,
+                ListingId = booking.ListingId,
+                StartDate = booking.StartDate,
+                EndDate = booking.EndDate,
+                Status = booking.Status
+            };
         }
 
-        public async Task<bool> CancelBookingAsync(Guid id)
+        public async Task<IEnumerable<BookingResponse>> GetAllAsync()
         {
-            var booking = await _bookingRepository.GetByIdAsync(id);
-            if (booking == null || booking.Status == "Cancelled" || booking.Status == "Paid")
-                return false;
-
-            booking.Status = "Cancelled";
-            booking.UpdatedAt = DateTime.UtcNow;
-
-            await _bookingRepository.UpdateAsync(booking);
-            return true;
+            var bookings = await _repository.GetAllAsync();
+            return bookings.Select(b => new BookingResponse
+            {
+                Id = b.Id,
+                UserId = b.UserId,
+                ListingId = b.ListingId,
+                StartDate = b.StartDate,
+                EndDate = b.EndDate,
+                Status = b.Status
+            });
         }
     }
 }

@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using BookingService.Dal.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookingService.Dal
 {
