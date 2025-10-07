@@ -90,3 +90,23 @@ tmp/
 backup/
 *.backup
 *.bak
+
+# macOS ARM64
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.fseventsd
+*.dSYM/
+*.xcworkspace/
+*.xcodeproj/
+*.swiftpm/
+*.swiftpm/
+*.build/
+DerivedData/
