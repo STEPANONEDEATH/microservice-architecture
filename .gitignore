@@ -1,0 +1,112 @@
+# Rider
+.idea/
+*.sln.iml
+*.csproj.iws
+*.user
+*.userosscache
+*.sln.docstates
+*.csproj.vspscc
+*.vspscc
+*_ReSharper.*
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+*.sln.ide
+*.pidb
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio
+.vs/
+.vscode/
+upgrade_log*.htm
+upgrade_log*.XML
+_UpgradeReport_Files/
+
+# NuGet
+.nuget/
+*.nupkg
+*.snupkg
+nuget.exe
+packages/
+**/packages/*
+!**/packages/build/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Runtime data
+publish/
+app.publish/
+
+# Logs
+*.log
+*.log*
+logs/
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# Coverage
+coverage.json
+coverage.cobertura.xml
+lcov.info
+**/coverage/
+
+# Docker
+docker-compose.override.yml
+.docker/
+
+# Local development
+appsettings.Development.json
+appsettings.Local.json
+
+# Temp
+temp/
+tmp/
+
+# Backup
+backup/
+*.backup
+*.bak
+
+# macOS ARM64
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.fseventsd
+*.dSYM/
+*.xcworkspace/
+*.xcodeproj/
+*.swiftpm/
+*.swiftpm/
+*.build/
+DerivedData/
