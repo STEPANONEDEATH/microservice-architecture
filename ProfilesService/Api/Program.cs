@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ProfilesService.Infrastructure;
 using ProfilesService.Infrastructure.Persistence;
-using ProfilesService.Application; // если у тебя есть Application слой с хэндлерами
+using ProfilesService.Application;
+using ProfilesService.Api.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +27,7 @@ builder.Services.AddDbContext<ProfilesDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add MediatR (Application assembly)
-builder.Services.AddMediatR(typeof(ProfilesService.Application.UseCases.RegisterUserCommand).Assembly);
+builder.Services.AddMediatR(typeof(RegisterUserHandler).Assembly);
 
 // Add Infrastructure
 builder.Services.AddInfrastructureDependencies();
