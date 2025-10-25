@@ -5,6 +5,9 @@ using BookingService.Logic.Interfaces;
 using BookingService.Logic.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using ExampleCore.HttpLogic;
+using ProfileConnectionLib;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,16 @@ builder.Services.AddDbContext<BookingDbContext>(options =>
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<IBookingService, BookingServiceImpl>();
 
+// Add HttpRequestService & ProfileServiceClient
+builder.Services.AddHttpClient<IHttpRequestService, HttpRequestService>();
+builder.Services.AddSingleton<IProfileServiceClient>(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    var http = sp.GetRequiredService<IHttpRequestService>();
+    return new ProfileServiceClient(http, config);
+});
+
+// Controllers
 builder.Services.AddControllers();
 
 // Swagger

@@ -6,20 +6,38 @@ using BookingService.Dal.Entities;
 using BookingService.Dal.Interfaces;
 using BookingService.Logic.Interfaces;
 using BookingService.Logic.Models;
+using ProfileConnectionLib;
+using Microsoft.Extensions.Logging; // для логгирования
 
 namespace BookingService.Logic.Services
 {
     public class BookingServiceImpl : IBookingService
     {
         private readonly IBookingRepository _repository;
+        private readonly IProfileServiceClient _profileClient;
+        private readonly ILogger<BookingServiceImpl> _logger;
 
-        public BookingServiceImpl(IBookingRepository repository)
+        public BookingServiceImpl(
+            IBookingRepository repository,
+            IProfileServiceClient profileClient,
+            ILogger<BookingServiceImpl> logger)
         {
             _repository = repository;
+            _profileClient = profileClient;
+            _logger = logger;
         }
 
         public async Task<BookingResponse> CreateBookingAsync(CreateBookingRequest request)
         {
+            // --- Проверяем, существует ли пользователь ---
+            var user = await _profileClient.GetUserAsync(request.UserId);
+            if (user == null)
+            {
+                _logger.LogWarning("Попытка создать бронь для несуществующего пользователя {UserId}", request.UserId);
+                throw new InvalidOperationException($"Пользователь {request.UserId} не найден в ProfileService.");
+            }
+
+            // --- Создаём бронь ---
             var booking = new Booking
             {
                 Id = Guid.NewGuid(),
@@ -31,6 +49,7 @@ namespace BookingService.Logic.Services
             };
 
             await _repository.AddAsync(booking);
+            _logger.LogInformation("Создана новая бронь {BookingId} для пользователя {UserId}", booking.Id, booking.UserId);
 
             return new BookingResponse
             {
