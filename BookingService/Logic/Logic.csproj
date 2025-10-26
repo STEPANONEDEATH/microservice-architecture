@@ -9,4 +9,14 @@
         <ProjectReference Include="..\..\Libs\ProfileConnectionLib\ProfileConnectionLib.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Messaging\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MassTransit" Version="8.5.5" />
+      <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+      <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.5.5" />
+    </ItemGroup>
+
 </Project>
