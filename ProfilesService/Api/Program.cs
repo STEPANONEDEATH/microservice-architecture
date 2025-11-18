@@ -29,7 +29,8 @@ builder.Services.AddDbContext<ProfilesDbContext>(options =>
 // Add MediatR (Application assembly)
 builder.Services.AddMediatR(typeof(RegisterUserHandler).Assembly);
 
-// Add Infrastructure
+// Redis + Semaphore
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddInfrastructureDependencies();
 
 var app = builder.Build();
